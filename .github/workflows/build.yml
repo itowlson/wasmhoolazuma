@@ -1,4 +1,4 @@
-name: Rust
+name: build
 
 on:
   push:
@@ -17,8 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: "Install Rust bits"
-      run: |
-        rustup target add wasm32-wasi
+      run: rustup target add wasm32-wasi
     - name: Build
       run: cargo build --verbose --target wasm32-wasi --release
     - name: Run tests
