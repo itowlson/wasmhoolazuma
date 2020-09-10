@@ -3,9 +3,8 @@ on:
   push:
     branches:
       - main
-    # TODO: uncomment when finished iterating - for now we just want it to run all the time!
-    # tags:
-    #   - "v*"
+    tags:
+      - "v*"
 
 env:
   ACR_NAME: itowlsonacrwasm
