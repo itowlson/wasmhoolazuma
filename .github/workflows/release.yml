@@ -7,6 +7,9 @@ on:
     # tags:
     #   - "v*"
 
+env:
+  ACR_NAME: itowlsonacrwasm
+
 jobs:
   build:
     name: Build release assets
@@ -61,5 +64,8 @@ jobs:
         name: wasmhoolazuma.wasm
         path: ./assets
 
+    - name: log into registry
+      run: az acr login -n ${ACR_NAME} -u ${{ secrets.ACR_SP_ID }} -p ${{ secrets.ACR_SP_PASSWORD }}
+
     - name: publish to registry
-      run: ./tools/wasm-to-oci push ./assets/wasmhoolazuma.wasm itowlsonacrwasm2.azurecr.io/wasmhoolazuma:${RELEASE_VERSION}
+      run: ./tools/wasm-to-oci push ./assets/wasmhoolazuma.wasm ${ACR_NAME}.azurecr.io/wasmhoolazuma:${RELEASE_VERSION}
